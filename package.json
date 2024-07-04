@@ -1,0 +1,15 @@
+{
+  "name": "hello-avs-fleek",
+  "version": "1.0.0",
+  "description": "Hello avs fleek",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "commonjs",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ethers": "^5.0.0"
+  }
+}
