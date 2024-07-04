@@ -1,22 +1,42 @@
 
 const ethers = require("ethers") ;
-const  delegationmanagerabi =  require("./abis/DelegationManager.json");
+const  helloworldabi =  require("./abis/HelloWorldServiceManager.json");
 
 
-async function  register_as_operator() {
-    let delegation_manager_address = "0x39053D51B77DC0d36036Fc1fCc8Cb819df8Ef37A";
+async function  sign_and_respond_to_task() {
+    let taskIndex;
+    let taskCreatedBlock;
+    let taskName;
+
+    let hello_world_contract_address = "0x3361953F4a9628672dCBcDb29e91735fb1985390";
     let rpc_url = "https://ethereum-holesky-rpc.publicnode.com";
     let provider = new ethers.providers.JsonRpcProvider(rpc_url);
+    
+    const privateKey = '0xdcf478a675411e0d970ab1a8dc36221cd5f3641c98b42b0df4f6c4eadca18f66';
+    const wallet = new ethers.Wallet(privateKey, provider);
+    
+    const message = `Hello, ${taskName}`;
+    const messageHash = ethers.utils.solidityKeccak256(["string"], [message]);
+    const messageBytes = ethers.utils.arrayify(messageHash);
+    const signature = await wallet.signMessage(messageBytes);
+    console.log(
+        `Signing and responding to task ${taskIndex}`
+    );
 
-const privateKey = '0xdcf478a675411e0d970ab1a8dc36221cd5f3641c98b42b0df4f6c4eadca18f66';
-const wallet = new ethers.Wallet(privateKey, provider);
-
-  
-
-}
-
-async function main(){
-    register_as_operator().await;
+    const hello_world_contract = new ethers.Contract(hello_world_contract_address,helloworldabi.abi,provider);
+    
+    const tx = await hello_world_contract.respondToTask(
+        { name: taskName, taskCreatedBlock: taskCreatedBlock },
+        taskIndex,
+        signature
+        );
+        await tx.wait();
+        console.log(`Responded to task.`);
+        
+    }
+    
+    async function main(){
+        sign_and_respond_to_task().await;
 
 }
 
