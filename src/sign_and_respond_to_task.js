@@ -1,12 +1,10 @@
 
-const ethers = require("ethers") ;
-const  helloworldabi =  require("./abis/HelloWorldServiceManager.json");
+import {ethers} from "ethers";
+import helloworldabi from "./abis/HelloWorldServiceManager.json";
 
+async function sign_and_respond_to_task(req) {
 
-async function  sign_and_respond_to_task() {
-    let taskIndex;
-    let taskCreatedBlock;
-    let taskName;
+    const {taskIndex, taskCreatedBlock, taskName} = req;
 
     let hello_world_contract_address = "0x3361953F4a9628672dCBcDb29e91735fb1985390";
     let rpc_url = "https://ethereum-holesky-rpc.publicnode.com";
@@ -29,15 +27,11 @@ async function  sign_and_respond_to_task() {
         { name: taskName, taskCreatedBlock: taskCreatedBlock },
         taskIndex,
         signature
-        );
-        await tx.wait();
-        console.log(`Responded to task.`);
-        
-    }
-    
-    async function main(){
-        sign_and_respond_to_task().await;
-
+    );
+    // await tx.wait();
+    return {tx} 
 }
-
-main();
+    
+export const main = async () =>{
+    return await sign_and_respond_to_task();
+}
