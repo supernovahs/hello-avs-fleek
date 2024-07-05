@@ -1,12 +1,10 @@
 
 import {ethers} from "ethers";
 import helloworldabi from "./abis/HelloWorldServiceManager.json";
+import createNewTask from "./create_new_task.js";
+async function sign_and_respond_to_task(hello_world_contract_address,taskIndex,taskCreatedBlock,taskName) {
 
-async function sign_and_respond_to_task(req) {
 
-    const {taskIndex, taskCreatedBlock, taskName} = req;
-
-    let hello_world_contract_address = "0x3361953F4a9628672dCBcDb29e91735fb1985390";
     let rpc_url = "https://ethereum-holesky-rpc.publicnode.com";
     let provider = new ethers.providers.JsonRpcProvider(rpc_url);
     
@@ -33,5 +31,9 @@ async function sign_and_respond_to_task(req) {
 }
     
 export const main = async () =>{
-    return await sign_and_respond_to_task();
+    let hello_world_contract_address = "0x3361953F4a9628672dCBcDb29e91735fb1985390";
+    let taskIndex = 0;
+    let taskCreatedBlock = 0 ;
+    let taskName = "helel";
+    return await sign_and_respond_to_task(hello_world_contract_address,taskIndex,taskCreatedBlock,taskName);
 }

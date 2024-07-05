@@ -20,7 +20,7 @@ async function register_as_operator(delegation_manager_address, rpc_url, private
     return({tx});
 }
 
-export const main = async (req) => {
+export const main = async () => {
     let delegation_manager_address = "0x39053D51B77DC0d36036Fc1fCc8Cb819df8Ef37A";
     let rpc_url = "https://ethereum-holesky-rpc.publicnode.com";
     const privateKey = '0xdcf478a675411e0d970ab1a8dc36221cd5f3641c98b42b0df4f6c4eadca18f66';
