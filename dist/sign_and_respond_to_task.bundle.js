@@ -22771,6 +22771,55 @@ module.exports = /*#__PURE__*/JSON.parse('{"abi":[{"type":"constructor","inputs"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(68);
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(88);
+/* harmony import */ var _abis_HelloWorldServiceManager_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(106);
+
+
+
+async function createNewTask(task_name,hello_world_contract_address) {
+
+    let rpc_url = "https://ethereum-holesky-rpc.publicnode.com";
+    let provider = new ethers__WEBPACK_IMPORTED_MODULE_1__.JsonRpcProvider(rpc_url);
+
+    const privateKey = '0x61d348ae547844f1fc30a8f6886d4850ac4a6934fe51aaa60e63d3a511f8047b';
+    const wallet = new ethers__WEBPACK_IMPORTED_MODULE_2__.Wallet(privateKey, provider);
+
+    const hello_world_contract = new ethers__WEBPACK_IMPORTED_MODULE_3__.Contract(hello_world_contract_address,_abis_HelloWorldServiceManager_json__WEBPACK_IMPORTED_MODULE_0__.abi,wallet);
+
+    const tx1 = await hello_world_contract.createNewTask(task_name);
+
+    // await tx1.wait();
+    return({tx: tx1});
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (async () => {
+    let hello_world_contract_address = "0x3361953F4a9628672dCBcDb29e91735fb1985390";
+    let task_name = generateRandomName();
+    return await createNewTask(task_name,hello_world_contract_address);
+});
+
+
+// Function to generate random names
+function generateRandomName() {
+    const adjectives = ['Quick', 'Lazy', 'Sleepy', 'Noisy', 'Hungry'];
+    const nouns = ['Fox', 'Dog', 'Cat', 'Mouse', 'Bear'];
+    const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+    const noun = nouns[Math.floor(Math.random() * nouns.length)];
+    const randomName = `${adjective}${noun}${Math.floor(Math.random() * 1000)}`;
+    return randomName;
+  }
+
+/***/ }),
+/* 108 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   keccak256: () => (/* binding */ keccak256),
 /* harmony export */   pack: () => (/* binding */ pack),
 /* harmony export */   sha256: () => (/* binding */ sha256)
@@ -22781,7 +22830,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ethersproject_sha2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(57);
 /* harmony import */ var _ethersproject_strings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(44);
 /* harmony import */ var _ethersproject_logger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
-/* harmony import */ var _version__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(108);
+/* harmony import */ var _version__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(109);
 
 
 
@@ -22875,7 +22924,7 @@ function sha256(types, values) {
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22992,36 +23041,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   main: () => (/* binding */ main)
 /* harmony export */ });
-/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
-/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(68);
-/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(107);
-/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
-/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(88);
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(68);
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(108);
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9);
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(88);
 /* harmony import */ var _abis_HelloWorldServiceManager_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(106);
+/* harmony import */ var _create_new_task_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(107);
 
 
 
 
-async function sign_and_respond_to_task(req) {
+async function sign_and_respond_to_task(hello_world_contract_address,taskIndex,taskCreatedBlock,taskName) {
 
-    const {taskIndex, taskCreatedBlock, taskName} = req;
 
-    let hello_world_contract_address = "0x3361953F4a9628672dCBcDb29e91735fb1985390";
     let rpc_url = "https://ethereum-holesky-rpc.publicnode.com";
-    let provider = new ethers__WEBPACK_IMPORTED_MODULE_1__.JsonRpcProvider(rpc_url);
+    let provider = new ethers__WEBPACK_IMPORTED_MODULE_2__.JsonRpcProvider(rpc_url);
     
     const privateKey = '0xdcf478a675411e0d970ab1a8dc36221cd5f3641c98b42b0df4f6c4eadca18f66';
-    const wallet = new ethers__WEBPACK_IMPORTED_MODULE_2__.Wallet(privateKey, provider);
+    const wallet = new ethers__WEBPACK_IMPORTED_MODULE_3__.Wallet(privateKey, provider);
     
     const message = `Hello, ${taskName}`;
-    const messageHash = ethers__WEBPACK_IMPORTED_MODULE_3__.keccak256(["string"], [message]);
-    const messageBytes = ethers__WEBPACK_IMPORTED_MODULE_4__.arrayify(messageHash);
+    const messageHash = ethers__WEBPACK_IMPORTED_MODULE_4__.keccak256(["string"], [message]);
+    const messageBytes = ethers__WEBPACK_IMPORTED_MODULE_5__.arrayify(messageHash);
     const signature = await wallet.signMessage(messageBytes);
     console.log(
         `Signing and responding to task ${taskIndex}`
     );
 
-    const hello_world_contract = new ethers__WEBPACK_IMPORTED_MODULE_5__.Contract(hello_world_contract_address,_abis_HelloWorldServiceManager_json__WEBPACK_IMPORTED_MODULE_0__.abi,provider);
+    const hello_world_contract = new ethers__WEBPACK_IMPORTED_MODULE_6__.Contract(hello_world_contract_address,_abis_HelloWorldServiceManager_json__WEBPACK_IMPORTED_MODULE_0__.abi,provider);
     
     const tx = await hello_world_contract.respondToTask(
         { name: taskName, taskCreatedBlock: taskCreatedBlock },
@@ -23033,9 +23081,11 @@ async function sign_and_respond_to_task(req) {
 }
     
 const main = async () =>{
-    return await sign_and_respond_to_task();
+    let hello_world_contract_address = "0x3361953F4a9628672dCBcDb29e91735fb1985390";
+    let taskIndex = 0;
+    let taskCreatedBlock = 0 ;
+    let taskName = "helel";
+    return await sign_and_respond_to_task(hello_world_contract_address,taskIndex,taskCreatedBlock,taskName);
 }
 })();
 
-
-export const main = __webpack_exports__.main;

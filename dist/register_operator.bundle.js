@@ -22875,35 +22875,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-async function register_as_operator() {
-    let delegation_manager_address = "0x39053D51B77DC0d36036Fc1fCc8Cb819df8Ef37A";
-    let rpc_url = "https://ethereum-holesky-rpc.publicnode.com";
+async function register_as_operator(delegation_manager_address, rpc_url, privateKey) {
     let provider = new ethers__WEBPACK_IMPORTED_MODULE_1__.JsonRpcProvider(rpc_url);
 
-    const privateKey = '0xdcf478a675411e0d970ab1a8dc36221cd5f3641c98b42b0df4f6c4eadca18f66';
     const wallet = new ethers__WEBPACK_IMPORTED_MODULE_2__.Wallet(privateKey, provider);
 
     const delegation_manager_contract = new ethers__WEBPACK_IMPORTED_MODULE_3__.Contract(delegation_manager_address,_abis_DelegationManager_json__WEBPACK_IMPORTED_MODULE_0__.abi,wallet);
 
-    console.log("Delgatinmanager Contract", delegation_manager_contract);
+    console.log("Delegationmanager Contract", delegation_manager_contract);
 
-    const tx1 = await delegation_manager_contract.registerAsOperator({
+    const tx = await delegation_manager_contract.registerAsOperator({
         earningsReceiver: wallet.address,
         delegationApprover: "0x0000000000000000000000000000000000000000",
         stakerOptOutWindowBlocks: 0
     }, "");
 
     // await tx1.wait();
-    return({tx: tx1});
+    return({tx});
 }
 
 const main = async () => {
-    return await register_as_operator();
+    let delegation_manager_address = "0x39053D51B77DC0d36036Fc1fCc8Cb819df8Ef37A";
+    let rpc_url = "https://ethereum-holesky-rpc.publicnode.com";
+    const privateKey = '0xdcf478a675411e0d970ab1a8dc36221cd5f3641c98b42b0df4f6c4eadca18f66';
+    return await register_as_operator(delegation_manager_address, rpc_url, privateKey);
 }
 
 })();
-
-
-export const main = __webpack_exports__.main;
-
 

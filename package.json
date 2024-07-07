@@ -2,11 +2,13 @@
   "name": "hello-avs-fleek",
   "version": "1.0.0",
   "description": "Hello avs fleek",
-  "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack.config.js && echo 'export const main = __webpack_exports__.main;' >> dist/bundle.js"
+    "build": "webpack --config webpack.config.js && echo 'export const main = __webpack_exports__.main;' >> dist/bundle.js",
+    "create_register_operator_name": "fleek functions create  --name register-operator",
+    "create_sign_and_respond_to_task_name": "fleek functions create  --name sign-and-respond-to-task",
+    "deploy_register_operator_to_fleek": "fleek functions deploy --name register-operator --path ./dist/register_operator.bundle.js",
+    "deploy_sign_and_respond_to_task_to_fleek": "fleek functions deploy --name sign-and-respond-to-task --path ./dist/sign_and_respond_to_task.bundle.js"
   },
-  "type":"module",
   "author": "",
   "license": "ISC",
   "devDependencies": {
