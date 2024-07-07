@@ -17,31 +17,33 @@ const RunAvs = async function(rpc_url, helloworldservicemanager) {
         console.log("taskindex",task_index);
         console.log("task name ",task_name);
         console.log("task created block ",task_created_block);
+
+        let data = JSON.stringify({
+          "taskIndex": task_index,
+          "taskCreatedBlock": task_created_block,
+          "taskName": task_name
+        });
+        
+        let config = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: data
+        };
+        
+        fetch('https://big-greece-straight.functions.on-fleek.app', config)
+          .then(response => response.json())
+          .then(data => {
+            console.log(JSON.stringify(data));
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
     
     });
 
-      let data = JSON.stringify({
-        "taskIndex": task_index,
-        "taskCreatedBlock": task_created_block,
-        "taskName": task_name
-      });
-      
-      let config = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: data
-      };
-      
-      fetch('https://big-greece-straight.functions.on-fleek.app', config)
-        .then(response => response.json())
-        .then(data => {
-          console.log(JSON.stringify(data));
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
+ 
 
 }
 
