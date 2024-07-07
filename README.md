@@ -9,6 +9,7 @@ We deploy individual functions of the [hello-world AVS](https://github.com/Layr-
 
 We then aggregate all the deployed URLs above and call them in [avs.js](./src/avs.js) in a manner that works similarly to a normal hello-world AVS.
 
+![IMG_6BDE16467E1B-1](https://github.com/supernovahs/hello-avs-fleek/assets/22412996/e2bf539c-b8e7-4e87-b956-857eb02af0a0)
 
 # Steps to Deploy Your own AVS to Fleek
 
