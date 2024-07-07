@@ -16,4 +16,9 @@ We then aggregate all the deployed URLs above and call them in [avs.js](./src/av
 - fleek login
 - fleek projects switch --id={projectId}
 - Modify Your register operator, sign_and_respond_to_task
-- To Build run ``
+- To Build run `npm run build`
+- To register name run `npm run create_register_operator_name` or `npm run create_sign_and_respond_to_task_name`
+- To deplopy to fleek run
+ `npm run deploy_register_operator_to_fleek`
+ and
+`npm run deploy_sign_and_respond_to_task_to_fleek`
