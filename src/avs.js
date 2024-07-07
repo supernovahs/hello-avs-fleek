@@ -1,8 +1,9 @@
-
 import {ethers} from "ethers";
 import createNewTask from "./create_new_task.js";
-import register_as_operator from "./register_operator.js";
-import sign_and_respond_to_task from "./sign_and_respond_to_task.js";
+import pkg from 'axios';
+const {axios} = pkg;
+// import register_as_operator from "./register_operator.js";
+// import sign_and_respond_to_task from "./sign_and_respond_to_task.js";
 import HelloWorldservicemanager from "./abis/HelloWorldServiceManager.json" assert {type: 'json'};
 const RunAvs = async function(rpc_url, helloworldservicemanager) {
     console.log("1");
@@ -19,7 +20,31 @@ const RunAvs = async function(rpc_url, helloworldservicemanager) {
         console.log("task created block ",task_created_block);
     
     });
-    
+
+    let data = JSON.stringify({
+        "taskIndex": `{task_index}`,
+        "taskCreatedBlock": `{task_created_block}`,
+        "taskName": `{task_name}`
+      });
+
+let config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'https://big-greece-straight.functions.on-fleek.app',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
+
+  axios.request(config)
+  .then((response) => {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
 }
 
 

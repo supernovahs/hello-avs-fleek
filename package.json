@@ -2,6 +2,7 @@
   "name": "hello-avs-fleek",
   "version": "1.0.0",
   "description": "Hello avs fleek",
+  "type": "module",
   "scripts": {
     "build": "webpack --config webpack.config.js && echo 'export const main = __webpack_exports__.main;' >> dist/bundle.js",
     "create_register_operator_name": "fleek functions create  --name register-operator",
@@ -16,6 +17,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "axios": "^1.7.2",
     "ethers": "^5.0.0"
   }
 }
