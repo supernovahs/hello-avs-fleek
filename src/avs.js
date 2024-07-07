@@ -33,9 +33,10 @@ const RunAvs = async function(rpc_url, helloworldservicemanager) {
         };
         
         fetch('https://big-greece-straight.functions.on-fleek.app', config)
-          .then(response => response.json())
           .then(data => {
+            console.log("task created");
             console.log(JSON.stringify(data));
+            console.log("after");
           })
           .catch(error => {
             console.error('Error:', error);
