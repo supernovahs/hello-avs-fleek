@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack --config webpack.config.js && echo 'export const main = __webpack_exports__.main;' >> dist/bundle.js"
   },
+  "type":"module",
   "author": "",
   "license": "ISC",
   "devDependencies": {

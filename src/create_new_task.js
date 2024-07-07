@@ -1,17 +1,15 @@
 import { ethers } from "ethers" ;
-import helloworldabi from "./abis/HelloWorldServiceManager.json";
+import helloworldabi from "./abis/HelloWorldServiceManager.json" assert{type: 'json'};
 
 async function createNewTask(task_name,hello_world_contract_address) {
 
     let rpc_url = "https://ethereum-holesky-rpc.publicnode.com";
     let provider = new ethers.providers.JsonRpcProvider(rpc_url);
 
-    const privateKey = '0xdcf478a675411e0d970ab1a8dc36221cd5f3641c98b42b0df4f6c4eadca18f66';
+    const privateKey = '0x61d348ae547844f1fc30a8f6886d4850ac4a6934fe51aaa60e63d3a511f8047b';
     const wallet = new ethers.Wallet(privateKey, provider);
 
     const hello_world_contract = new ethers.Contract(hello_world_contract_address,helloworldabi.abi,wallet);
-
-    console.log("Hello world Contract", hello_world_contract);
 
     const tx1 = await hello_world_contract.createNewTask(task_name);
 
@@ -19,7 +17,7 @@ async function createNewTask(task_name,hello_world_contract_address) {
     return({tx: tx1});
 }
 
-export const main = async () => {
+export default async () => {
     let hello_world_contract_address = "0x3361953F4a9628672dCBcDb29e91735fb1985390";
     let task_name = generateRandomName();
     return await createNewTask(task_name,hello_world_contract_address);

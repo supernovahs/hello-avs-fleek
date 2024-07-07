@@ -1,6 +1,6 @@
 
 import {ethers} from "ethers";
-import helloworldabi from "./abis/HelloWorldServiceManager.json";
+import helloworldabi from "./abis/HelloWorldServiceManager.json" assert {type: 'json'};
 import createNewTask from "./create_new_task.js";
 async function sign_and_respond_to_task(hello_world_contract_address,taskIndex,taskCreatedBlock,taskName) {
 
@@ -30,7 +30,7 @@ async function sign_and_respond_to_task(hello_world_contract_address,taskIndex,t
     return {tx} 
 }
     
-export const main = async () =>{
+export default async () =>{
     let hello_world_contract_address = "0x3361953F4a9628672dCBcDb29e91735fb1985390";
     let taskIndex = 0;
     let taskCreatedBlock = 0 ;
