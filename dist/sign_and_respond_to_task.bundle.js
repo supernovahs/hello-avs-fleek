@@ -23080,11 +23080,9 @@ async function sign_and_respond_to_task(hello_world_contract_address,taskIndex,t
     return {tx} 
 }
     
-const main = async () =>{
+const main = async (req) =>{
+    const {taskIndex,taskCreatedBlock,taskName} = req.body;
     let hello_world_contract_address = "0x3361953F4a9628672dCBcDb29e91735fb1985390";
-    let taskIndex = 0;
-    let taskCreatedBlock = 0 ;
-    let taskName = "helel";
     return await sign_and_respond_to_task(hello_world_contract_address,taskIndex,taskCreatedBlock,taskName);
 }
 })();

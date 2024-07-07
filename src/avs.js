@@ -1,7 +1,6 @@
 import {ethers} from "ethers";
 import createNewTask from "./create_new_task.js";
-import pkg from 'axios';
-const {axios} = pkg;
+import fetch from "node-fetch"
 // import register_as_operator from "./register_operator.js";
 // import sign_and_respond_to_task from "./sign_and_respond_to_task.js";
 import HelloWorldservicemanager from "./abis/HelloWorldServiceManager.json" assert {type: 'json'};
@@ -21,29 +20,28 @@ const RunAvs = async function(rpc_url, helloworldservicemanager) {
     
     });
 
-    let data = JSON.stringify({
-        "taskIndex": `{task_index}`,
-        "taskCreatedBlock": `{task_created_block}`,
-        "taskName": `{task_name}`
+      let data = JSON.stringify({
+        "taskIndex": task_index,
+        "taskCreatedBlock": task_created_block,
+        "taskName": task_name
       });
-
-let config = {
-    method: 'post',
-    maxBodyLength: Infinity,
-    url: 'https://big-greece-straight.functions.on-fleek.app',
-    headers: { 
-      'Content-Type': 'application/json'
-    },
-    data : data
-  };
-
-  axios.request(config)
-  .then((response) => {
-    console.log(JSON.stringify(response.data));
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+      
+      let config = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: data
+      };
+      
+      fetch('https://big-greece-straight.functions.on-fleek.app', config)
+        .then(response => response.json())
+        .then(data => {
+          console.log(JSON.stringify(data));
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
 
 }
 
